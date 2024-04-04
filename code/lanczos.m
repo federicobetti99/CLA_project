@@ -35,5 +35,4 @@ xlabel("$k$", 'interpreter', 'latex', 'FontSize', 15);
 ylabel("$\frac{\vert \vert \mathbf{d}_{\mathrm{Lanczos}}^k- diag(A^{-1}) \vert \vert_2}{\vert \vert diag(A^{-1}) \vert \vert_2}$", ...
     'interpreter', 'latex', 'FontSize', 18);
 title("Lanczos estimator", 'FontSize', 15);
-legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
 saveas(fig, "../figures/lanczos_estimator", "epsc");
