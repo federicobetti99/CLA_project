@@ -1,6 +1,6 @@
 # Estimating the diagonal of the inverse
  
-This repository contains the numerical experiments for the "Estimating the diagonal of the inverse" project, carried out in the context of the MATH-453 Computational Linear Algebra course at EPFL.
+This repository contains the numerical experiments for the `Estimating the diagonal of the inverse` project, carried out in the context of the MATH-453 Computational Linear Algebra course at EPFL.
 
 ## Repository description
 - `code` - Implementation of the experiments
