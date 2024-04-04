@@ -1,5 +1,0 @@
-n = 100;
-M = delsq(numgrid('S',n));
-diaginvM = diag(inv(M));
-ests = mc_estimator(M, 200);
-loglog((1:200), vecnorm(ests-repmat(diaginvM, 1, 200)), ) % /norm(diaginvM)
