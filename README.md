@@ -1,2 +1,2 @@
-# CLA_project
+# Estimating the diagonal of the inverse
  
