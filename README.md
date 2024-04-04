@@ -10,7 +10,7 @@ This repository contains the numerical experiments for the "Estimating the diago
 - `matrices` - Folder containing the nos3 matrix in .mat format
 
 ## Reproducibility of the results
-We provide a unique Matlab script `main.m` to reproduce the results shown in the report. The latter produces the plots presented in the report in the same order as they appear in the latter. In particular:
+We provide a unique Matlab script `main.m` to reproduce the results shown in the report. The latter produces the plots presented in the report in the same order as they appear in the latter.
 
 ## Authors
 - Federico Betti
