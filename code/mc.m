@@ -8,9 +8,10 @@ addpath("utils")
 rng("default")
 rng(0)
 
-%% define number of samples, number of averages
+%% define number of samples, number of averages and width of CI
 N = 10000;
 avgs = 10;
+alpha = 0.05;
 
 %% load matrix and compute exact quantity
 datastruct = load("../matrices/nos3.mat");
@@ -28,8 +29,9 @@ end
 
 mean_errors = mean(avg_errors, 1);
 std_dev = std(avg_errors, [], 1) / sqrt(avgs);
-curve1 = mean_errors + std_dev;
-curve2 = mean_errors - std_dev;
+cdi = norminv(1-alpha/2);
+curve1 = mean_errors + cdi * std_dev / sqrt(avgs);
+curve2 = mean_errors - cdi * std_dev / sqrt(avgs);
 x = (1:N);
 x2 = [x, fliplr(x)];
 inBetween = [curve1, fliplr(curve2)];
@@ -41,7 +43,7 @@ loglog(x, 10 ./ sqrt(x), 'LineWidth', 2);
 hold on
 loglog(x, mean_errors, 'LineWidth', 4);
 hold on
-h = fill(x2, inBetween, 'b');
+h = fill(x2, inBetween, 'r');
 set(h, 'facealpha', .2);
 hold on
 xlabel("$N$", 'interpreter', 'latex', 'FontSize', 15);

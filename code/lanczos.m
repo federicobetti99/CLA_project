@@ -7,7 +7,7 @@ clc
 addpath("utils")
 
 %% define number of Lanczos iterations
-k = 10;
+k = 50;
 
 %% load matrix and compute exact quantity
 datastruct = load("../matrices/nos3.mat");
@@ -17,15 +17,14 @@ diaginvM = diag(inv(M));
 errors = zeros(k, 1);
 
 %% compute Lanczos estimator for every value of k
-for j=1:k
-    [V, T] = lanczos(M, G, rand(size(M, 1), 1), j);
+for j = 1:k
+    [V, T] = lanczos_estimator(M, G, j);
     L = chol(T);
     W = inv(G)' * V * inv(L)';
-    est = vecnorm(W, 2, 2);
+    est = power(vecnorm(W, 2, 2), 2);
     error = vecnorm(est-diaginvM) / norm(diaginvM);
     errors(j, :) = error;
 end
-
 
 %% plot and save figure
 fig = figure();
