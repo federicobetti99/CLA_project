@@ -21,8 +21,7 @@ avg_errors = zeros(avgs, N);
 
 %% compute Monte Carlo estimator, averaging for every value of N
 for j=1:avgs
-    fprintf("Carrying out average %d out of %d \n", j, avgs);
-    ests = mc_estimator(M, N);
+    ests = compute_mc_estimator(M, N);
     errors = vecnorm(ests-repmat(diaginvM, 1, N)) / norm(diaginvM);
     avg_errors(j, :) = errors;
 end

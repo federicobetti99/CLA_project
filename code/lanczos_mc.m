@@ -7,7 +7,7 @@ clc
 addpath("utils")
 
 %% define number of Lanczos iterations, number of samples and averages, width of CI
-ks = [5; 10];
+ks = [10; 50];
 N = 1000;
 avgs = 5;
 alpha = 0.05;
@@ -21,12 +21,10 @@ avg_errors = zeros(size(ks, 1), avgs, N);
 
 %% compute Lanczos estimator for a fixed value of k
 for j = 1:size(ks, 1)
-    [V, T] = lanczos_estimator(M, G, ks(j));
-    L = chol(T);
-    W = inv(G)' * V * inv(L)';
-    est = power(vecnorm(W, 2, 2), 2);
+    [Ts, Vs] = lanczos_iterations(M, G, ks(j));
+    [est, W] = compute_lanczos_estimator(G, Ts, Vs);
     for l = 1:avgs
-        ests = mc_estimator(M, N, W);
+        ests = compute_mc_estimator(M, N, W);
         ests = ests + est; % add Lanczos estimate
         errors = vecnorm(ests-repmat(diaginvM, 1, N)) / norm(diaginvM);
         avg_errors(j, l, :) = errors;

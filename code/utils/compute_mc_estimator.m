@@ -1,4 +1,4 @@
-function ests = mc_estimator(A, N, W)
+function ests = compute_mc_estimator(A, N, W)
 % This function computes a Monte Carlo estimator for diag(inv(A))
 % 
 %   A: input matrix
