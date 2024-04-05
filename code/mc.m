@@ -4,18 +4,21 @@ close all
 clc
 
 %% define number of samples, number of averages and width of CI
-N = 1000;
+N = 10000;
 avgs = 10;
 alpha = 0.05;
 
 %% load matrix and compute exact quantity
-datastruct = load("../matrices/nos3.mat");
+matname = "mhdb416";
+matfile = sprintf("../matrices/%s.mat", matname);
+datastruct = load(matfile);
 M = datastruct.Problem.A;
 diaginvM = diag(inv(M));
 
 %% compute Monte Carlo estimator, averaging for every value of N
 avg_errors = zeros(avgs, N);
 for j = 1:avgs
+    fprintf("Computing %d average out of %d \n", j, avgs);
     ests = compute_mc_estimator(M, N);
     avg_errors(j, :) = vecnorm(ests-repmat(diaginvM, 1, N)) / norm(diaginvM);
 end
@@ -39,10 +42,14 @@ hold on
 h = fill(x2, inBetween, get(pl, 'Color'));
 set(h, 'facealpha', .2);
 hold on
-xlabel("$N$", 'interpreter', 'latex', 'FontSize', 15);
+xlabel("$N$", 'interpreter', 'latex', 'fontsize', 15);
 ylabel("$\frac{\| \mathbf{d}_{\mathrm{MC}}^N - \mathrm{diag}(A^{-1}) \|_2}{\| \mathrm{diag}(A^{-1}) \|_2}$", ...
-    'interpreter', 'latex', 'FontSize', 18);
-title("Monte Carlo estimator", 'FontSize', 15);
+    'interpreter', 'latex', 'fontsize', 18);
+a = get(gca, 'XTickLabel');
+set(gca, 'XTickLabel', a, 'fontsize', 15);
+a = get(gca, 'YTickLabel');
+set(gca, 'YTickLabel', a, 'fontsize', 15);
 legend(fig_legend_string, 'interpreter', 'latex');
 legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
-saveas(fig, "../figures/mc_estimator", "epsc");
+namefile = sprintf("../figures/%s/mc_estimator", matname);
+saveas(fig, namefile, "epsc");

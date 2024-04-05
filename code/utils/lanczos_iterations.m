@@ -18,7 +18,6 @@ function [T, Q] = lanczos_iterations(mat, G, k)
 %               For k < N, mat ~ Q * T * Q'
 %
 
-    
     n = size(mat, 1);
     v = randn(n, 1);  % random initial vector
     

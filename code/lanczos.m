@@ -4,11 +4,13 @@ close all
 clc
 
 %% load matrix and compute exact quantity, define number of Lanczos iterations
-datastruct = load("../matrices/nos3.mat");
+matname = "mhdb416";
+matfile = sprintf("../matrices/%s.mat", matname);
+datastruct = load(matfile);
 M = datastruct.Problem.A;
-G = ichol(M);
+G = ichol(M, struct('type','ict','droptol', 1e-3));
 diaginvM = diag(inv(M));
-k = 500;
+k = 200;
 errors = zeros(k, 1);
 
 %% compute Lanczos estimator for every value of j = 1, ..., k
@@ -26,5 +28,9 @@ hold on
 xlabel("$k$", 'interpreter', 'latex', 'FontSize', 15);
 ylabel("$\frac{\| \mathbf{d}_{\mathrm{Lanczos}}^k- \mathrm{diag}(A^{-1}) \|_2}{\| \mathrm{diag}(A^{-1}) \|_2}$", ...
     'interpreter', 'latex', 'FontSize', 18);
-title("Lanczos estimator", 'FontSize', 15);
-saveas(fig, "../figures/lanczos_estimator", "epsc");
+a = get(gca, 'XTickLabel');
+set(gca, 'XTickLabel', a, 'fontsize', 15);
+a = get(gca, 'YTickLabel');
+set(gca, 'YTickLabel', a, 'fontsize', 15);
+namefile = sprintf("../figures/%s/lanczos_estimator", matname);
+saveas(fig, namefile, "epsc");

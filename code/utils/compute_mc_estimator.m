@@ -6,16 +6,17 @@ function ests = compute_mc_estimator(A, N, W)
 %   W: Lanczos factor for variance reduction, can also not be passed
 %
    n = size(A, 1);
-   ests = [];
-   L = ichol(A); % compute incomplete Cholesky factorization once and for all
+   ests = zeros(n, N);
+   L = ichol(A, struct('type','ict','droptol', 1e-3)); % compute incomplete Cholesky factorization once and for all
    sum = 0;
+   Z = (rand(n, N) < .5) * 2 - 1; % sample from Rademacher distribution
    for l = 1 : N
-       z = ((rand(1, n) < .5) * 2 - 1)'; % sample from Rademacher distribution
-       [y, ~, ~, ~, ~] = pcg(A, z, 1e-10, 200, L, L'); % solve iteratively linear system involving A
+       z = Z(:, l);
+       [y, ~, ~, ~, ~] = pcg(A, z, [], [], L, L'); % solve iteratively linear system involving A
        if nargin == 3
            y = y - W * W' * z;
        end
        sum = sum + y .* z;
-       ests = [ests, sum / l];  % update with current point-wise multiplication
+       ests(:, l) = sum / l;  % update with current point-wise multiplication
    end
 end

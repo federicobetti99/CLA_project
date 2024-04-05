@@ -10,7 +10,9 @@ avgs = 10;
 alpha = 0.05;
 
 %% load matrix and compute exact quantity
-datastruct = load("../matrices/nos3.mat");
+matname = "mesh3em5";
+matfile = sprintf("../matrices/%s.mat", matname);
+datastruct = load(matfile);
 M = datastruct.Problem.A;
 G = ichol(M);
 diaginvM = diag(inv(M));
@@ -53,7 +55,11 @@ end
 xlabel("$N$", 'interpreter', 'latex', 'FontSize', 15);
 ylabel("$\frac{\| \mathbf{d}_{\mathrm{Lanczos-MC}}^{k, N} - \mathrm{diag}(A^{-1}) \|_2}{\| \mathrm{diag}(A^{-1}) \|_2}$", ...
     'interpreter', 'latex', 'FontSize', 18);
-title("Lanczos Monte Carlo estimator", 'FontSize', 15);
+a = get(gca, 'XTickLabel');
+set(gca, 'XTickLabel', a, 'fontsize', 15);
+a = get(gca, 'YTickLabel');
+set(gca, 'YTickLabel', a, 'fontsize', 15);
 legend(fig_legend_string, 'interpreter', 'latex');
 legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
-saveas(fig, "../figures/lanczos_mc_estimator", "epsc");
+namefile = sprintf("../figures/%s/lanczos_mc_estimator", matname);
+saveas(fig, namefile, "epsc");
