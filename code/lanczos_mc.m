@@ -3,13 +3,10 @@ clear
 close all
 clc
 
-%% import utilities
-addpath("utils")
-
 %% define number of Lanczos iterations, number of samples and averages, width of CI
 ks = [10; 50];
-N = 1000;
-avgs = 5;
+N = 10000;
+avgs = 10;
 alpha = 0.05;
 
 %% load matrix and compute exact quantity
@@ -56,7 +53,7 @@ for j = 1:size(ks, 1)
 end
 
 xlabel("$N$", 'interpreter', 'latex', 'FontSize', 15);
-ylabel("$\frac{\vert \vert \mathbf{d}_{\mathrm{Lanczos-MC}}^{k, N} - diag(A^{-1}) \vert \vert_2}{\vert \vert diag(A^{-1}) \vert \vert_2}$", ...
+ylabel("$\frac{\| \mathbf{d}_{\mathrm{Lanczos-MC}}^{k, N} - \mathrm{diag}(A^{-1}) \|_2}{\| \mathrm{diag}(A^{-1}) \|_2}$", ...
     'interpreter', 'latex', 'FontSize', 18);
 title("Lanczos Monte Carlo estimator", 'FontSize', 15);
 legend(fig_legend_string, 'interpreter', 'latex');

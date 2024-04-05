@@ -3,13 +3,8 @@ clear
 close all
 clc
 
-%% import utilities and fix seed
-addpath("utils")
-rng("default")
-rng(0)
-
 %% define number of samples, number of averages and width of CI
-N = 10000;
+N = 1000;
 avgs = 10;
 alpha = 0.05;
 
@@ -17,13 +12,12 @@ alpha = 0.05;
 datastruct = load("../matrices/nos3.mat");
 M = datastruct.Problem.A;
 diaginvM = diag(inv(M));
-avg_errors = zeros(avgs, N);
 
 %% compute Monte Carlo estimator, averaging for every value of N
-for j=1:avgs
+avg_errors = zeros(avgs, N);
+for j = 1:avgs
     ests = compute_mc_estimator(M, N);
-    errors = vecnorm(ests-repmat(diaginvM, 1, N)) / norm(diaginvM);
-    avg_errors(j, :) = errors;
+    avg_errors(j, :) = vecnorm(ests-repmat(diaginvM, 1, N)) / norm(diaginvM);
 end
 
 mean_errors = mean(avg_errors, 1);
@@ -38,15 +32,15 @@ inBetween = [curve1, fliplr(curve2)];
 %% plot and save figure
 fig = figure();
 fig_legend_string = ["$\mathcal{O}(1/\sqrt{N})$", ""];
-loglog(x, 10 ./ sqrt(x), 'LineWidth', 2);
+loglog(x, 10 ./ sqrt(x), 'LineWidth', 1);
 hold on
-loglog(x, mean_errors, 'LineWidth', 4);
+pl = loglog(x, mean_errors, 'LineWidth', 3);
 hold on
-h = fill(x2, inBetween, 'r');
+h = fill(x2, inBetween, get(pl, 'Color'));
 set(h, 'facealpha', .2);
 hold on
 xlabel("$N$", 'interpreter', 'latex', 'FontSize', 15);
-ylabel("$\frac{\vert \vert \mathbf{d}_{\mathrm{MC}}^N - diag(A^{-1}) \vert \vert_2}{\vert \vert diag(A^{-1}) \vert \vert_2}$", ...
+ylabel("$\frac{\| \mathbf{d}_{\mathrm{MC}}^N - \mathrm{diag}(A^{-1}) \|_2}{\| \mathrm{diag}(A^{-1}) \|_2}$", ...
     'interpreter', 'latex', 'FontSize', 18);
 title("Monte Carlo estimator", 'FontSize', 15);
 legend(fig_legend_string, 'interpreter', 'latex');
