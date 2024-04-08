@@ -4,17 +4,17 @@ close all
 clc
 
 %% load matrix and compute exact quantity, define number of Lanczos iterations
-matname = "mhdb416";
+matname = "nos3";
 matfile = sprintf("../matrices/%s.mat", matname);
 datastruct = load(matfile);
 M = datastruct.Problem.A;
 G = ichol(M, struct('type','ict','droptol', 1e-3));
 diaginvM = diag(inv(M));
-k = 200;
+k = 500;
 errors = zeros(k, 1);
 
 %% compute Lanczos estimator for every value of j = 1, ..., k
-[Ts, Vs] = lanczos_iterations(M, G, k);
+[Ts, Vs] = lanczos_iterations(M, k, G);
 for j = 1:k
     [est, W] = compute_lanczos_estimator(G, Ts(1:j, 1:j), Vs(:, 1:j));
     errors(j, :) = vecnorm(est-diaginvM) / norm(diaginvM);
