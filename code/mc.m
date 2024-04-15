@@ -13,7 +13,8 @@ matname = "mhdb416";
 matfile = sprintf("../matrices/%s.mat", matname);
 datastruct = load(matfile);
 M = datastruct.Problem.A;
-diaginvM = diag(inv(M));
+n = size(M, 1);
+diaginvM = diag(M \ eye(n, n));
 
 %% compute Monte Carlo estimator, averaging for every value of N
 avg_errors = zeros(avgs, N);
@@ -35,7 +36,7 @@ inBetween = [curve1, fliplr(curve2)];
 %% plot and save figure
 fig = figure();
 fig_legend_string = ["$\mathcal{O}(1/\sqrt{N})$", ""];
-loglog(x, 10 ./ sqrt(x), 'LineWidth', 1);
+loglog(x, 1 ./ sqrt(x), 'LineWidth', 1);
 hold on
 pl = loglog(x, mean_errors, 'LineWidth', 3);
 hold on

@@ -1,6 +1,6 @@
 function [H, U] = lanczos_iterations(A, m, G)
 % Perform m steps of the Lanczos process, storing the full basis U
-% with reorthogonalization on Hermitian A with starting vector x.
+% with reorthogonalization on symmetric A with starting vector x.
 % A is always assumed to be square.
     
     n = size(A, 1);
