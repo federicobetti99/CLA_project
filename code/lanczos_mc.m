@@ -3,6 +3,11 @@ clear
 close all
 clc
 
+%% import utilities and fix seed
+addpath("utils")
+rng("default")
+rng(0)
+
 %% define number of Lanczos iterations, number of samples and averages, width of CI
 N = 1000;
 avgs = 10;

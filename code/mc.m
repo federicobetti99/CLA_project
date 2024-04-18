@@ -3,6 +3,11 @@ clear
 close all
 clc
 
+%% import utilities and fix seed
+addpath("utils")
+rng("default")
+rng(0)
+
 %% define number of samples, number of averages and width of CI
 N = 10000;
 avgs = 10;
