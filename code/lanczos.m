@@ -3,8 +3,14 @@ clear
 close all
 clc
 
+%% import utilities and fix seed
+addpath("utils")
+rng("default")
+rng(0)
+
+
 %% load matrix and compute exact quantity, define number of Lanczos iterations
-matname = "nos3";
+matname = "mesh3em5";
 matfile = sprintf("../matrices/%s.mat", matname);
 
 datastruct = load(matfile);
