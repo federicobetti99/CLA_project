@@ -27,6 +27,15 @@ switch matname
         disp("Invalid matrix name passed");
 end
 
+fig = figure();
+semilogy( 1 ./ eig(M), 'LineWidth', 3);
+a = get(gca, 'XTickLabel');
+set(gca, 'XTickLabel', a, 'fontsize', 13);
+a = get(gca, 'YTickLabel');
+set(gca, 'YTickLabel', a, 'fontsize', 13);
+namefile = sprintf("../figures/%s/relgap", matname);
+saveas(fig, namefile, "epsc");
+
 errors = zeros(k, 1);
 precond_errors = zeros(k, 1);
 

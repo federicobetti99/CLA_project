@@ -14,7 +14,7 @@ avgs = 10;
 alpha = 0.05;
 
 %% load matrix and compute exact quantity
-matname = "mhdb416";
+matname = "nos3";
 matfile = sprintf("../matrices/%s.mat", matname);
 datastruct = load(matfile);
 M = datastruct.Problem.A;
@@ -58,7 +58,7 @@ for j = 1:size(ks, 1)
     curve1 = mean_errors(j, :) + cdi * std_dev(j, :) / sqrt(avgs);
     curve2 = mean_errors(j, :) - cdi * std_dev(j, :) / sqrt(avgs);
     inBetween = [curve1, fliplr(curve2)];
-    pl = loglog(x, mean_errors(j, :), 'LineWidth', 3);
+    pl = semilogy(x, mean_errors(j, :), 'LineWidth', 3);
     hold on
     kstr = sprintf("$k = %.0f$", string(ks(j)));
     fig_legend_string = [fig_legend_string, kstr];
