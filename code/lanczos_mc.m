@@ -14,7 +14,7 @@ avgs = 10;
 alpha = 0.05;
 
 %% load matrix and compute exact quantity
-matname = "nos3";
+matname = "mhdb416";
 matfile = sprintf("../matrices/%s.mat", matname);
 datastruct = load(matfile);
 M = datastruct.Problem.A;
