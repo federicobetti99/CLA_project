@@ -1,4 +1,16 @@
 function [] = comparison(M, k, N, avgs, alpha, namefile)
+% This function carries out a comparison between the three estimators
+% investigated in the project for the estimation of diag(inv(M))
+% 
+% Inputs:
+%   M: input matrix of size n x n
+%   k: number of Lanczos iterations
+%   N: number of Monte Carlo samples
+%   avgs: number of averages for MC and Lanczos-MC estimates
+%   alpha: width of the confidence interval
+%   namefile: where to save the plot
+% 
+% Outputs:
 
     %% compute incomplete Cholesky factor
     G = ichol(M);
@@ -66,6 +78,7 @@ function [] = comparison(M, k, N, avgs, alpha, namefile)
     legend(fig_legend_string, 'interpreter', 'latex');
     legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
     saveas(fig, namefile, "epsc");
+    
 end    
 
 

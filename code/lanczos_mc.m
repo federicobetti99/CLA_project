@@ -1,5 +1,17 @@
 function [] = lanczos_mc(M, N, ks, avgs, alpha, namefile)
-    
+% This function computes a Lanczos-MC estimator for diag(inv(M)) for every
+% value of Lanczos iterations stored in ks
+% 
+% Inputs:
+%   M: input matrix of size n x n
+%   N: number of Monte Carlo samples
+%   ks: numbers of Lanczos iterations
+%   avgs: number of averages for MC and Lanczos-MC estimates
+%   alpha: width of the confidence interval
+%   namefile: where to save the plot
+% 
+% Outputs:
+
     %% load matrix and compute exact quantity
     G = ichol(M);
     diaginvM = diag(inv(M));
@@ -17,7 +29,7 @@ function [] = lanczos_mc(M, N, ks, avgs, alpha, namefile)
     end
     
     mean_errors = mean(avg_errors, 2);
-    std_dev = std(avg_errors, [], 2) / sqrt(avgs);
+    std_dev = std(avg_errors, [], 2);
     cdi = norminv(1-alpha/2);
     x = (1:N);
     x2 = [x, fliplr(x)];
@@ -49,4 +61,5 @@ function [] = lanczos_mc(M, N, ks, avgs, alpha, namefile)
     legend(fig_legend_string, 'interpreter', 'latex');
     legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
     saveas(fig, namefile, "epsc");
+
 end

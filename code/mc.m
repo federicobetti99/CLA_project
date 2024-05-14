@@ -1,5 +1,15 @@
 function [] = mc(M, N, avgs, alpha, namefile)
-    
+% This function computes a MC estimator for diag(inv(M))
+% 
+% Inputs:
+%   M: input matrix of size n x n
+%   N: number of Monte Carlo samples
+%   avgs: number of averages for MC and Lanczos-MC estimates
+%   alpha: width of the confidence interval
+%   namefile: where to save the plot
+% 
+% Outputs:  
+
     %% compute exact quantity
     n = size(M, 1);
     diaginvM = diag(M \ eye(n, n));
@@ -12,7 +22,7 @@ function [] = mc(M, N, avgs, alpha, namefile)
     end
     
     mean_errors = mean(avg_errors, 1);
-    std_dev = std(avg_errors, [], 1) / sqrt(avgs);
+    std_dev = std(avg_errors, [], 1);
     cdi = norminv(1-alpha/2);
     curve1 = mean_errors + cdi * std_dev / sqrt(avgs);
     curve2 = mean_errors - cdi * std_dev / sqrt(avgs);
@@ -40,4 +50,5 @@ function [] = mc(M, N, avgs, alpha, namefile)
     legend(fig_legend_string, 'interpreter', 'latex');
     legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
     saveas(fig, namefile, "epsc");
+
 end

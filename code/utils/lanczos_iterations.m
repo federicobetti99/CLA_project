@@ -1,9 +1,19 @@
-function [H, U] = lanczos_iterations(A, m, G)
+function [H, U] = lanczos_iterations(M, m, G)
 % Perform m steps of the Lanczos process, storing the full basis U
-% with reorthogonalization on symmetric A with starting vector x.
-% A is always assumed to be square.
+% with reorthogonalization on symmetric M with starting vector x.
+% M is always assumed to be square.
+%
+% Inputs:
+%   M: input matrix of size n x n
+% % % %   m: number of iterations
+%   G: preconditioner, can also not be passed
+%
+% Outputs:
+%   H: tridigonal matrix obtained from Lanczos iterations 
+%   U: matrix of size n x m whose columns are an orthogonal basis for the
+%      m-th Krylov subspace
     
-    n = size(A, 1);
+    n = size(M, 1);
     x = rand(n, 1);
     x = x / norm(x);
     
@@ -14,10 +24,10 @@ function [H, U] = lanczos_iterations(A, m, G)
     
     for j = 1:m
         if nargin == 2
-            z = A * U(:,end);
+            z = M * U(:,end);
         else
             z =  G' \ U(:, end);
-            z = A * z;
+            z = M * z;
             z = G \ z;
         end
 

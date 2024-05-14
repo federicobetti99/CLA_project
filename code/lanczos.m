@@ -1,4 +1,13 @@
 function [] = lanczos(M, k, namefile)
+% This function computes a Lanczos based estimator 
+% for every value j from 1 to k
+% 
+% Inputs:
+%   M: input matrix of size n x n
+%   k: number of Lanczos iterations
+%   namefile: where to save the plot
+% 
+% Outputs:
 
     %% compute incomplete Cholesky factor and compute exact quantity
     G = ichol(M);
@@ -13,7 +22,7 @@ function [] = lanczos(M, k, namefile)
     
     %% compute Lanczos estimator for every value of j = 1, ..., k
     for j = 1:k
-        est = compute_lanczos_estimator(Ts(1:j, 1:j), Vs(:, 1:j));
+        [est, ~] = compute_lanczos_estimator(Ts(1:j, 1:j), Vs(:, 1:j));
         errors(j, :) = vecnorm(est-diaginvM) / norm(diaginvM);
     end
     
@@ -22,7 +31,7 @@ function [] = lanczos(M, k, namefile)
     
     %% compute Lanczos estimator for every value of j = 1, ..., k
     for j = 1:k
-        est = compute_lanczos_estimator(Ts(1:j, 1:j), Vs(:, 1:j), G);
+        [est, ~] = compute_lanczos_estimator(Ts(1:j, 1:j), Vs(:, 1:j), G);
         precond_errors(j, :) = vecnorm(est-diaginvM) / norm(diaginvM);
     end
     
@@ -45,4 +54,5 @@ function [] = lanczos(M, k, namefile)
     legend(fig_legend_string, 'interpreter', 'latex');
     legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
     saveas(fig, namefile, "epsc");
+    
 end
