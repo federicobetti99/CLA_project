@@ -20,6 +20,7 @@ function [] = comparison(M, k, N, avgs, alpha, namefile)
     %% compute Monte Carlo estimator, averaging for every value of N
     avg_mc_errors = zeros(avgs, N);
     for j = 1:avgs
+        fprintf("MC estimator: computing average %d out of %d\n", j, avgs);
         ests = compute_mc_estimator(M, N);
         avg_mc_errors(j, :) = vecnorm(ests-repmat(diaginvM, 1, N)) / norm(diaginvM);
     end
@@ -39,6 +40,7 @@ function [] = comparison(M, k, N, avgs, alpha, namefile)
     %% compute Lanczos MC estimator
     avg_errors = zeros(avgs, N);
     for l = 1:avgs
+        fprintf("Lanczos-MC estimator for k = %d: computing average %d out of %d\n", k, l, avgs);
         ests = compute_mc_estimator(M, N, W);
         ests = ests + lanczos_est; % add Lanczos estimate
         avg_errors(l, :) = vecnorm(ests-repmat(diaginvM, 1, N)) / norm(diaginvM);

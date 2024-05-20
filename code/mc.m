@@ -17,7 +17,7 @@ function [] = mc(M, N, avgs, alpha, namefile)
     %% compute Monte Carlo estimator, averaging for every value of N
     avg_errors = zeros(avgs, N);
     for j = 1:avgs
-        fprintf("MC estimator: computing average %d out of %d\n", j, avgs)
+        fprintf("MC estimator: computing average %d out of %d\n", j, avgs);
         ests = compute_mc_estimator(M, N);
         avg_errors(j, :) = vecnorm(ests-repmat(diaginvM, 1, N)) / norm(diaginvM);
     end

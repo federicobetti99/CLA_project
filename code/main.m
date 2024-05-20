@@ -12,7 +12,7 @@ rng("default")
 rng(0)
 
 %% set matrix name and load matrix
-matname = "mesh3em5";
+matname = "nos3";
 matfile = sprintf("../matrices/%s.mat", matname);
 datastruct = load(matfile);
 M = datastruct.Problem.A;
