@@ -41,15 +41,15 @@ function [] = mc(M, N, avgs, alpha, namefile)
     h = fill(x2, inBetween, get(pl, 'Color'));
     set(h, 'facealpha', .2);
     hold on
-    xlabel("$N$", 'interpreter', 'latex', 'fontsize', 15);
+    xlabel("$N$", 'interpreter', 'latex', 'fontsize', 18);
     ylabel("$\frac{\| \mathbf{d}_{\mathrm{MC}}^N - \mathrm{diag}(A^{-1}) \|_2}{\| \mathrm{diag}(A^{-1}) \|_2}$", ...
-        'interpreter', 'latex', 'fontsize', 18);
+        'interpreter', 'latex', 'fontsize', 25);
     a = get(gca, 'XTickLabel');
-    set(gca, 'XTickLabel', a, 'fontsize', 15);
+    set(gca, 'XTickLabel', a, 'fontsize', 18);
     a = get(gca, 'YTickLabel');
-    set(gca, 'YTickLabel', a, 'fontsize', 15);
+    set(gca, 'YTickLabel', a, 'fontsize', 18);
     legend(fig_legend_string, 'interpreter', 'latex');
-    legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
+    legend('Location', 'northeast', 'FontSize', 18, 'NumColumns', 1);
     saveas(fig, namefile, "epsc");
 
 end

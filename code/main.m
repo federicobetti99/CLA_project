@@ -12,7 +12,7 @@ rng("default")
 rng(0)
 
 %% set matrix name and load matrix
-matname = "nos3";
+matname = "mesh3em5";
 matfile = sprintf("../matrices/%s.mat", matname);
 datastruct = load(matfile);
 M = datastruct.Problem.A;
@@ -29,6 +29,9 @@ d = dictionary(["nos3", "mesh3em5", "mhdb416"], [500, 200, 400]);
 k = lookup(d, matname); % number of Lanczos iterations
 namefile = sprintf("../figures/%s/lanczos_estimator", matname);
 lanczos(M, k, namefile);
+
+namefile = sprintf("../figures/%s/relgap", matname);
+relgap(M, namefile);
 
 %% Lanczos-MC estimator
 N = 1000;                   % number of Monte Carlo samples

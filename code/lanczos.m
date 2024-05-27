@@ -44,15 +44,15 @@ function [] = lanczos(M, k, namefile)
     hold on
     fig_legend_string = ["Lanczos", "preconditioned Lanczos"];
     hold on
-    xlabel("$k$", 'interpreter', 'latex', 'FontSize', 15);
+    xlabel("$k$", 'interpreter', 'latex', 'FontSize', 18);
     ylabel("$\frac{\| \mathbf{d}_{\mathrm{Lanczos}}^k- \mathrm{diag}(A^{-1}) \|_2}{\| \mathrm{diag}(A^{-1}) \|_2}$", ...
-        'interpreter', 'latex', 'FontSize', 18);
+        'interpreter', 'latex', 'FontSize', 25);
     a = get(gca, 'XTickLabel');
     set(gca, 'XTickLabel', a, 'fontsize', 13);
     a = get(gca, 'YTickLabel');
     set(gca, 'YTickLabel', a, 'fontsize', 13);
     legend(fig_legend_string, 'interpreter', 'latex');
-    legend('Location', 'northeast', 'FontSize', 15, 'NumColumns', 1);
+    legend('Location', 'northeast', 'FontSize', 18, 'NumColumns', 1);
     saveas(fig, namefile, "epsc");
     
 end
