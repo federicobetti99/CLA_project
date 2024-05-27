@@ -52,9 +52,9 @@ function [] = lanczos_mc(M, N, ks, avgs, alpha, namefile)
         hold on
     end
     
-    xlabel("$N$", 'interpreter', 'latex', 'FontSize', 15);
+    xlabel("$N$", 'interpreter', 'latex', 'FontSize', 18);
     ylabel("$\frac{\| \mathbf{d}_{\mathrm{Lanczos-MC}}^{k, N} - \mathrm{diag}(A^{-1}) \|_2}{\| \mathrm{diag}(A^{-1}) \|_2}$", ...
-        'interpreter', 'latex', 'FontSize', 18);
+        'interpreter', 'latex', 'FontSize', 25);
     a = get(gca, 'XTickLabel');
     set(gca, 'XTickLabel', a, 'fontsize', 13);
     a = get(gca, 'YTickLabel');
