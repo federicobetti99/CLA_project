@@ -5,6 +5,7 @@ This repository contains the numerical experiments for the `Estimating the diago
 ## Repository description
 - `code` - Implementation of the experiments
   - `utils` - Subfolder with utilities functions
+  - `comparison.m` - Main script for comparison of the three estimators
   - `lanczos_mc.m` - Main script for Lanczos MC estimator
   - `lanczos.m` - Main script for Lanczos estimator
   - `mc.m` - Main script for MC estimator
