@@ -5,7 +5,7 @@ function [H, U] = lanczos_iterations(M, m, G)
 %
 % Inputs:
 %   M: input matrix of size n x n
-% % % %   m: number of iterations
+%   m: number of iterations
 %   G: preconditioner, can also not be passed
 %
 % Outputs:
