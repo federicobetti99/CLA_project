@@ -18,4 +18,4 @@ We provide a unique Matlab script `main.m` to reproduce the results shown in the
 
 ## Authors
 - Federico Betti
-- Theophile Boinnard
+- Théophile Boinnard
