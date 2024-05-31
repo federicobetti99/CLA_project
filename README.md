@@ -14,7 +14,7 @@ This repository contains the numerical experiments for the `Estimating the diago
 - `matrices` - Folder containing the matrices used in the experiments in `.mat` format
 
 ## Reproducibility of the results
-We provide a unique Matlab script `main.m` to reproduce the results shown in the report. We fixed the seed once and for all to produce the plots in the report, hence running such script will reproduce exactly those plots, in the same order as they appear in the document.
+We provide a unique Matlab script `main.m` to reproduce the results shown in the report. We fixed the seed once and for all to produce the plots in the report, hence running such script will reproduce exactly those plots, in the same order as they appear in the document. Because we tested multiple matrices in our reports, a variable `matname` is present in `main.m`. To ease your job, this is by default set to `nos3`.
 
 ## Authors
 - Federico Betti
