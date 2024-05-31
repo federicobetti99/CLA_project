@@ -28,6 +28,7 @@ mc(M, N, avgs, alpha, namefile);
 d = dictionary(["nos3", "mesh3em5", "mhdb416"], [500, 200, 400]);
 k = lookup(d, matname); % number of Lanczos iterations
 namefile = sprintf("../figures/%s/lanczos_estimator", matname);
+eig_namefile = sprintf("../figures/%s/eigs", matname);
 lanczos(M, k, namefile);
 
 namefile = sprintf("../figures/%s/relgap", matname);

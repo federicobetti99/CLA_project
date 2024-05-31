@@ -24,20 +24,20 @@ function [H, U] = lanczos_iterations(M, m, G)
     
     for j = 1:m
         if nargin == 2
-            z = M * U(:,end);
+            z = M * U(:, end);
         else
             z =  G' \ U(:, end);
             z = M * z;
             z = G \ z;
         end
 
-        alpha = U(:,end)' * z;
-        u = z - U(:,end) * alpha;
+        alpha = U(:, end)' * z;
+        u = z - U(:, end) * alpha;
         if j > 1
-            u = u - U(:,end-1) * beta;
+            u = u - U(:, end-1) * beta;
         end
         
-        % Reorthognalization
+        % Reorthogonalization
         alphas = U' * u;
         u = u - U * alphas;
         alpha = alpha + alphas(end);

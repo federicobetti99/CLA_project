@@ -1,4 +1,4 @@
-function [] = lanczos(M, k, namefile)
+function [] = lanczos(M, k, namefile, eig_namefile)
 % This function computes a Lanczos based estimator 
 % for every value j from 1 to k
 % 
@@ -6,6 +6,7 @@ function [] = lanczos(M, k, namefile)
 %   M: input matrix of size n x n
 %   k: number of Lanczos iterations
 %   namefile: where to save the plot
+%   eig_namefile: where to save the eigenvalues plot
 % 
 % Outputs:
 
@@ -54,5 +55,15 @@ function [] = lanczos(M, k, namefile)
     legend(fig_legend_string, 'interpreter', 'latex');
     legend('Location', 'northeast', 'FontSize', 18, 'NumColumns', 1);
     saveas(fig, namefile, "epsc");
+
+    fig = figure();
+    semilogy(1 ./ eig(M), 'LineWidth', 3);
+    hold on
+    ylabel('Inverse ordered eigenvalues', 'fontsize', 20);
+    a = get(gca, 'XTickLabel');
+    set(gca, 'XTickLabel', a, 'fontsize', 13);
+    a = get(gca, 'YTickLabel');
+    set(gca, 'YTickLabel', a, 'fontsize', 13);
+    saveas(fig, eig_namefile, "epsc");
     
 end
