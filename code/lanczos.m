@@ -57,7 +57,8 @@ function [] = lanczos(M, k, namefile, eig_namefile)
     saveas(fig, namefile, "epsc");
 
     fig = figure();
-    semilogy(1 ./ eig(M), 'LineWidth', 3);
+    dM = eig(M);
+    semilogy(1 ./ dM, 'LineWidth', 3);
     hold on
     ylabel('Inverse ordered eigenvalues', 'fontsize', 20);
     a = get(gca, 'XTickLabel');

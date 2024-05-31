@@ -70,9 +70,9 @@ function [] = comparison(M, k, N, avgs, alpha, namefile)
     hold on
     pl = semilogy(x, lanczos_error * ones(size(x)), 'LineWidth', 3);
     hold on
-    xlabel("$N$", 'interpreter', 'latex', 'fontsize', 15);
+    xlabel("$N$", 'interpreter', 'latex', 'fontsize', 18);
     ylabel("Relative $\ell_2$ error", ...
-        'interpreter', 'latex', 'fontsize', 18);
+        'interpreter', 'latex', 'fontsize', 25);
     a = get(gca, 'XTickLabel');
     set(gca, 'XTickLabel', a, 'fontsize', 13);
     a = get(gca, 'YTickLabel');
